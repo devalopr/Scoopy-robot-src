@@ -1,0 +1,53 @@
+#scoopy_controller:
+scoopy:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers --------------------------------------
+  blw_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: blw_revolute
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  flw_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: flw_revolute
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  brw_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: brw_revolute
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  frw_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: frw_revolute
+    pid: {p: 10.0, i: 0.0, d: 0.0}
+  
+  post_slider_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: post_slider
+    pid: {p: 30000.0, i: 0.0, d: 0.0}
+  outer_mid_slider_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: outer_mid_slider
+    pid: {p: 30000.0, i: 0.0, d: 0.0}
+  mid_inner_slider_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: mid_inner_slider
+    pid: {p: 30000.0, i: 0.0, d: 0.0}
+  toolhead_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: toolhead_revolute
+    pid: {p: 20000.0, i: 0.0, d: 0.0}
+  lid_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lid_revolute
+    pid: {p: 100.0, i: 0.0, d: 0.0}
+  camera_pan_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: camera_pan
+    pid: {p: 100.0, i: 0.0, d: 0.0}
+  camera_tilt_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: camera_tilt
+    pid: {p: 100.0, i: 0.0, d: 0.0}

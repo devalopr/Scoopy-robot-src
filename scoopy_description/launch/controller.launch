@@ -1,0 +1,29 @@
+<launch>
+
+<rosparam file="$(find scoopy_description)/launch/controller.yaml" command="load"/>
+
+<node args="blw_revolute_position_controller 
+      flw_revolute_position_controller 
+      brw_revolute_position_controller 
+      frw_revolute_position_controller 
+
+      post_slider_position_controller 
+      outer_mid_slider_position_controller 
+      mid_inner_slider_position_controller 
+
+      toolhead_revolute_position_controller 
+      lid_revolute_position_controller 
+
+      camera_pan_position_controller 
+      camera_tilt_position_controller 
+      joint_state_controller " 
+
+      name="controller_spawner" ns="scoopy" output="screen" pkg="controller_manager" respawn="false" type="spawner"/>
+      
+<node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher">
+
+  <remap from="/joint_states" to="/scoopy/joint_states"/>
+</node>
+
+</launch>
+
