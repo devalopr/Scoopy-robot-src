@@ -10,6 +10,9 @@
 
 <xacro:property name="camera_link_name" value="realsense_1" />
 <xacro:property name="camera_name" value="real_sense" />
+<xacro:property name="sprayer_name" value="vacuum_rigid" />
+
+
 
 
 <gazebo>
@@ -60,6 +63,7 @@
     </sensor>
   </gazebo>
 
+<!--
     <gazebo>
       <plugin name="gazebo_ros_vacuum_gripper" filename="libgazebo_ros_vacuum_gripper.so">
         <robotNamespace>scoopy</robotNamespace>
@@ -68,6 +72,7 @@
       </plugin>
     </gazebo>
 
+-->
 
 <gazebo reference="base_link">
   <material>${body_color}</material>
@@ -141,10 +146,13 @@
 </gazebo>
 
 <gazebo reference="vacuum_1">
-  <material>${black_color}</material>
-  <mu1>${general_friction}</mu1>
-  <mu2>${general_friction}</mu2>
-  <selfCollide>true</selfCollide>
+    <material>Gazebo/Blue</material>
+    <mu1>10</mu1>
+    <mu2>10</mu2>
+    <minDepth>0.003</minDepth>
+    <maxVel>0</maxVel>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
 </gazebo>
 
 <gazebo reference="sprayer_1">
@@ -284,6 +292,45 @@
   </sensor>
 </gazebo>
 
+
+<!--
+<gazebo reference="${sprayer_name}"> -->
+
+  <plugin name="water_gun_plugin" filename="libMRSGazeboWaterGunPlugin.so">
+
+<!--
+    <muzzle_velocity>0.2</muzzle_velocity>
+    <offset_x>0</offset_x>
+    <offset_y>0</offset_y>
+    <offset_z>0</offset_z>
+    <spread>2</spread>
+    <particle_capacity>1000</particle_capacity>
+-->
+
+    <spawning_reservoir>1</spawning_reservoir>
+
+  </plugin>
+
+<!--
+
+
+<gazebo reference="${camera_link_name}">
+  <plugin name="water_gun_plugin" filename="libMRSGazeboWaterGunPlugin.so">
+    <muzzle_velocity>${muzzle_velocity}</muzzle_velocity>
+    <offset_x>${offset_x}</offset_x>
+    <offset_y>${offset_y}</offset_y>
+    <offset_z>${offset_z}</offset_z>
+    <spread>${spread}</spread>
+    <particle_capacity>${particle_capacity}</particle_capacity>
+    <spawning_reservoir>${spawning_reservoir}</spawning_reservoir>
+  </plugin>
+</gazebo>
+
+
+
+
+
+-->
 
 
 </robot>
