@@ -494,7 +494,7 @@
 </joint>
 
 <joint name="Rigid27" type="fixed">
-  <origin rpy="0 0 0" xyz="0.2925 -0.0 -0.035"/>
+  <origin rpy="0 1.57079 0" xyz="0.2925 -0.0 -0.035"/>
   <parent link="scooper_main_1"/>
   <child link="camera_1"/>
 </joint>
