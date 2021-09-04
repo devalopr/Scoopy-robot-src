@@ -51,3 +51,4 @@ scoopy:
     type: effort_controllers/JointPositionController
     joint: camera_tilt
     pid: {p: 100.0, i: 0.0, d: 0.0}
+

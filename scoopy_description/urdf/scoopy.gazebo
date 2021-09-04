@@ -164,7 +164,7 @@
   <selfCollide>true</selfCollide>
 </gazebo>
 
-<gazebo reference="camera_1">
+<gazebo reference="realsense_1">
   <material>${black_color}</material>
   <mu1>${general_friction}</mu1>
   <mu2>${general_friction}</mu2>
@@ -180,6 +180,13 @@
 
 <gazebo reference="lidar_1">
   <material>${white_color}</material>
+  <mu1>${general_friction}</mu1>
+  <mu2>${general_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="camera_1">
+  <material>${black_color}</material>
   <mu1>${general_friction}</mu1>
   <mu2>${general_friction}</mu2>
   <selfCollide>true</selfCollide>

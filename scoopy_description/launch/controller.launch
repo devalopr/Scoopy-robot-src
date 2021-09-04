@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <launch>
 
 <rosparam file="$(find scoopy_description)/launch/controller.yaml" command="load"/>
@@ -26,4 +27,3 @@
 </node>
 
 </launch>
-
