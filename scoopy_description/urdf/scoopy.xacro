@@ -214,6 +214,8 @@
   </collision>
 </link>
 
+
+<!--
 <link name="vacuum_1">
   <inertial>
     <origin rpy="0 0 0" xyz="1.316169395693123e-13 -2.1186220889083034e-15 0.002499999999999988"/>
@@ -227,16 +229,16 @@
     </geometry>
     <material name="silver"/>
   </visual>
-<!--  
+  
   <collision>
     <origin rpy="0 0 0" xyz="-0.26 0.0 -0.0"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/vacuum_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
--->  
+  
 </link>
-
+-->
 <link name="sprayer_1">
   <inertial>
     <origin rpy="0 0 0" xyz="3.219646771412954e-15 -2.1323066842246274e-15 0.002499999999999988"/>
@@ -450,13 +452,14 @@
   <limit effort="20" lower="-1.570796" upper="1.570796" velocity="20"/>
 </joint>
 
+<!--
 <joint name="vacuum_rigid" type="revolute">
   <origin rpy="0 0 0" xyz="0.2 -0.0 -0.2"/>
   <parent link="scooper_main_1"/>
   <child link="vacuum_1"/>
   <limit effort="30" velocity="1.0" lower="0" upper="0" />  
 </joint>
-
+-->
 <joint name="sprayer_rigid" type="fixed">
   <origin rpy="0 0 0" xyz="0.2 -0.0 -0.2"/>
   <parent link="scooper_main_1"/>
