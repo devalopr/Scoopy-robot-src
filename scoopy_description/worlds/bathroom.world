@@ -1,7 +1,9 @@
 <sdf version='1.7'>
   <world name='default'>
+
+<!--  
     <light name='sun' type='directional'>
-      <cast_shadows>1</cast_shadows>
+      <cast_shadows>0</cast_shadows>
       <pose>0 0 10 0 -0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
       <specular>0.2 0.2 0.2 1</specular>
@@ -18,6 +20,8 @@
         <falloff>0</falloff>
       </spot>
     </light>
+-->
+    
     <model name='ground_plane'>
       <static>1</static>
       <link name='link'>
@@ -825,5 +829,36 @@
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
+    
+    
+    <light type="directional" name="bathroom_light">
+
+
+      <pose>-2.631701 -0.670522 2.511903 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>800</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.109764 0.109764 -0.987878</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+
+
+
+    </light>
+    
+    
+    
+    
+    
+    
+    
   </world>
 </sdf>
