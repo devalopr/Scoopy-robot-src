@@ -865,6 +865,7 @@
 	<pose>-3.0 -1.002290 -0.002823 -0.062829 -0.005948 -0.003219</pose>
     </include>
 
+<!--
     <include>
       <uri>model://can</uri>
       <name>can_3</name>                                       
@@ -882,7 +883,7 @@
       <name>can_5</name>                                       
 	<pose>-3.18623 -0.155495 -0.003284 -0.046824 -0.0003 -0.003462</pose>
     </include>
-
+-->
 
 
     <include>
@@ -891,7 +892,7 @@
 	<pose>-3.08013 -2.19304 0.007713 -0.314201 0.033169 0.006683</pose>
     </include>
 
-
+<!--
     <include>
       <uri>model://paper_cup</uri>
       <name>paper_cup2</name>                                       
@@ -917,6 +918,7 @@
 	<pose>-1.47981 -1.54521 0 4e-06 -1e-06 0</pose>
     </include>
 
+-->
 
 
     <include>
