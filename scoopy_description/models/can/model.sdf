@@ -19,7 +19,6 @@
         <geometry>
           <mesh>
             <uri>model://can/meshes/coke_can.dae</uri>
-          	<scale>0.6 0.6 0.6</scale>            
           </mesh>
         </geometry>
         <surface>
@@ -44,7 +43,6 @@
         <geometry>
           <mesh>
             <uri>model://can/meshes/coke_can.dae</uri>
-            <scale>0.6 0.6 0.6</scale>                        
           </mesh>
         </geometry>
       </visual>

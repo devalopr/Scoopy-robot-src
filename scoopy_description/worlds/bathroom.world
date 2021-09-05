@@ -849,14 +849,62 @@
         <outer_angle>0</outer_angle>
         <falloff>0</falloff>
       </spot>
-
-
-
     </light>
-    
-    
-    
-    
+
+<!-- Adding models -->    
+    <include>
+      <uri>model://can</uri>
+      <name>can_1</name>                                    
+      
+	<pose>-3.287298 -1.002290 -0.002823 -0.062829 -0.005948 -0.003219</pose>
+    </include>
+
+    <include>
+      <uri>model://can</uri>
+      <name>can_2</name>                                       
+	<pose>-3.0 -1.002290 -0.002823 -0.062829 -0.005948 -0.003219</pose>
+    </include>
+
+    <include>
+      <uri>model://can</uri>
+      <name>can_3</name>                                       
+	<pose>-2.5 1.002290 -0.002823 -0.062829 -0.005948 -0.003219</pose>
+    </include>
+
+    <include>
+      <uri>model://can</uri>
+      <name>can_4</name>                                       
+	<pose>-3.20876 -1.75391 -0.00329 -0.046503 4.9e-05 -0.003466</pose>
+    </include>
+
+    <include>
+      <uri>model://can</uri>
+      <name>can_5</name>                                       
+	<pose>-3.18623 -0.155495 -0.003284 -0.046824 -0.0003 -0.003462</pose>
+    </include>
+
+
+
+    <include>
+      <uri>model://bot_bin</uri>
+      <name>bin_1</name>                                       
+	<pose>-3.562247 0.089099 0.000002 -0.000051 0.000031 0.036442</pose>
+    </include>
+
+    <include>
+      <uri>model://human_bin</uri>
+      <name>bin_2</name>                                       
+	<pose>-1.322149 -0.566017 0 0 -0.000004 -0.022300</pose>
+    </include>
+                
+
+    <include>
+      <uri>model://soap_dispenser</uri>
+      <name>soap_1</name>                                       
+	<pose>-3.86564 -2.00809 0.99966 0.000932 -0.001932 -1e-06</pose>
+    </include>
+                
+          
     
     
     
