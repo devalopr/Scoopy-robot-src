@@ -9,7 +9,6 @@ project(scoopy_behaviour)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  move_base_msgs
   rospy
   sensor_msgs
   std_msgs
