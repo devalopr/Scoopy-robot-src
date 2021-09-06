@@ -25,7 +25,7 @@ class Behaviour:
         #Keeping location points
         self.way_points = {}
 
-        self.way_points["sink_pose"] = [-2.937,-2,-3.124]
+        self.way_points["sink_pose"] = [-2.937,-1.9,-3.124]
         self.way_points["sink_pose_right"] = [-2.937,-1.863,-3.124]
 
         self.way_points["center_pose"] = [-2.405,-1.248,1.580]
@@ -102,9 +102,17 @@ class Behaviour:
         #Goint to init pose
         self.init_pose()
 
+        #Moving to the center of the bathroom
+        self.move_location("center_pose")
 
-        #self.move_location("center_pose")
-        #self.move_location("exit_pose")
+        #Scanning for object
+        self.scan_objects()
+
+        #Exiting the room
+        self.move_location("exit_pose")
+
+
+
 
     def init_pose(self):
         rospy.loginfo("Moving to inital arm configuration")
@@ -120,6 +128,11 @@ class Behaviour:
         self.move_joint("post_slider", 0)
         rospy.sleep(10)
         rospy.loginfo("Set Robot init pose")
+
+    def scan_objects(self):
+        rospy.loginfo("Scanning for trash")
+        rospy.sleep(3)
+
 
     #Assume robot is in init state
     def start_cleaning_couter(self):
