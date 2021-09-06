@@ -136,6 +136,10 @@ class Behaviour:
         #Moving to the center of the bathroom
         self.move_location("center_pose")
 
+        #Rotate tool head
+        self.move_joint("tool_head", 0)
+        rospy.sleep(4)
+
         #Scanning for object
         self.scan_objects()
 
@@ -201,8 +205,8 @@ class Behaviour:
         map_coord = self.way_points["center_pose"]
         for i in range(-3,3):
             rospy.sleep(4)
-            rospy.loginfo("Rotating Angle>",i)
-            rospy.loginfo("Trash Found:pose_x:"+self.trash_pose_x+" pose_y:"+ self.trash_pose_y )
+            rospy.loginfo("Rotating Angle>"+str(i))
+            rospy.loginfo("Trash Found:pose_x:"+str(self.trash_pose_x)+" pose_y:"+ str(self.trash_pose_y))
             self.send_movebase_pose(map_coord[0],map_coord[1],i)
        
 
