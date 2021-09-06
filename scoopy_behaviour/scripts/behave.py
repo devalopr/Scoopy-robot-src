@@ -28,7 +28,7 @@ class Behaviour:
         self.way_points["sink_pose"] = [-2.937,-1.9,-3.124]
         self.way_points["sink_pose_right"] = [-2.937,-1.863,-3.124]
 
-        self.way_points["center_pose"] = [-2.405,-1.248,1.580]
+        self.way_points["center_pose"] = [-2.405,-1.248,-1.580]
         self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
 
         #Init movebase
@@ -69,13 +69,20 @@ class Behaviour:
     def behave(self):
         #Init pose
         rospy.loginfo("Setting the robot init pose")
-        self.init_pose()
+        #self.init_pose()
  
+        #Moving to center
+        rospy.loginfo("Moving to center")
+        self.move_location("center_pose")
+        rospy.loginfo("Completed center pose movement")
+        rospy.sleep(2)
+
         #Moving to sink
-        rospy.loginfo("Moving near to sink")
+        rospy.loginfo("Moving to sink")
         self.move_location("sink_pose")
         rospy.loginfo("Completed sink pose movement")
         rospy.sleep(2)
+
 
         #Start cleaning counter
         rospy.loginfo("Start cleaning counter")
@@ -222,7 +229,10 @@ class Behaviour:
 if __name__ == '__main__':
     try:
         rospy.init_node('scoopy_behave')
-        rospy.loginfo("Initializing Scoopy Behaviour")        
+        rospy.loginfo("Initializing Scoopy Behaviour")  
+        
+        input = input("Press enter to start challenge")      
+        
         behave_obj = Behaviour()
         
 
