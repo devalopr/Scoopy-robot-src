@@ -19,6 +19,9 @@ from std_msgs.msg import Float64
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
+from visualization_msgs.msg import Marker
+from visualization_msgs.msg import MarkerArray
+
 
 class Behaviour:
 
@@ -55,6 +58,11 @@ class Behaviour:
         self.client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
         self.client.wait_for_server()
         self.goal = MoveBaseGoal()
+
+        #Marker array
+        self.marker_pub = rospy.Publisher("marker_topic", MarkerArray,queue_size=10)  # check if publisher object is used an
+        self.markerArray = MarkerArray()
+
 
         #Defining publishers
         self.topic_name = {}
@@ -180,6 +188,32 @@ class Behaviour:
             pass
 
 
+    #Marker function
+    def publish_marker(self,x,y):
+
+        marker = Marker()
+        marker.header.frame_id = "map"
+        marker.type = marker.CUBE
+        marker.action = marker.ADD
+        marker.scale.x = 0.5                         # can keep this as gobal parameters
+        marker.scale.y = 0.5
+        marker.scale.z = 0.01
+        marker.color.a = 1.0
+        marker.color.r = 0.0
+        marker.color.g = 0.0
+        marker.color.b = 1.0
+
+        marker.pose.position.x = x
+        marker.pose.position.y = y
+
+        marker.pose.orientation.w = 1.0
+
+        self.markerArray.markers.append(marker)
+        self.marker_pub.publish(self.markerArray)
+
+
+
+
     def init_pose(self):
         rospy.loginfo("Moving to inital arm configuration")
 
@@ -251,11 +285,27 @@ class Behaviour:
         self.move_joint("mid_arm", 0.22)
         rospy.sleep(3)
 
+        #Publish marker
+        
+        self.publish_marker(-3.5, -2.2)
+        self.publish_marker(-3.51, -2.21)
+        self.publish_marker(-3.52, -2.23)
+        self.publish_marker(-3.53, -2.24)
+
+
         self.move_joint("mid_arm", 0.32)
         rospy.sleep(3)
 
         self.move_joint("mid_arm", 0.22)
         rospy.sleep(3)
+
+        #Publish marker
+       
+        self.publish_marker(-3.5, -1.9)
+        self.publish_marker(-3.51, -1.9)
+        self.publish_marker(-3.52, -1.9)
+        self.publish_marker(-3.53, -1.9)
+
 
         rospy.loginfo("Completed cleaning of counter top")
 
