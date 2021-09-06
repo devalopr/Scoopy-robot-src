@@ -50,8 +50,7 @@ class Behaviour:
 
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
         self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
-        self.way_points["exit_pose_prev"] = [-2.405, -1.248,1.580]
-
+        self.way_points["exit_pose_prev"] = [-2.355, -0.048,0.042]
 
 
         #Init movebase
