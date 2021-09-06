@@ -32,6 +32,7 @@ class Behaviour:
 
         self.lowerBound=np.array([0,50,50])
         self.upperBound=np.array([10,255,255])
+
         self.kernelOpen=np.ones((5,5))
         self.kernelClose=np.ones((20,20))
 
@@ -45,7 +46,6 @@ class Behaviour:
 
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
         self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
-
 
 
 
@@ -198,7 +198,7 @@ class Behaviour:
         rospy.loginfo("Start cleaning couter top")
 
         rospy.loginfo("Extending post slider")
-        self.move_joint("post_slider", 1.12)
+        self.move_joint("post_slider", 1.06)
         rospy.sleep(20)
 
         rospy.loginfo("Extending outer arm")
