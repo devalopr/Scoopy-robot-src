@@ -75,13 +75,13 @@ class Behaviour:
         rospy.loginfo("Moving to center")
         self.move_location("center_pose")
         rospy.loginfo("Completed center pose movement")
-        rospy.sleep(2)
+        rospy.sleep(4)
 
         #Moving to sink
         rospy.loginfo("Moving to sink")
         self.move_location("sink_pose")
         rospy.loginfo("Completed sink pose movement")
-        rospy.sleep(2)
+        rospy.sleep(4)
 
 
         #Start cleaning counter
@@ -230,7 +230,7 @@ if __name__ == '__main__':
     try:
         rospy.init_node('scoopy_behave')
         rospy.loginfo("Initializing Scoopy Behaviour")  
-        rospy.loginfo("Press enter to start the challenge>: ")
+        rospy.loginfo("Press enter to start the challenge>: \n")
         
         input = input("Press enter to start challenge: > ")      
         
