@@ -20,7 +20,7 @@
   <node args="-param robot_description -urdf -model scoopy -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
   
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="paused" value="false"/>
+    <arg name="paused" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
     <arg name="headless" value="false"/>
