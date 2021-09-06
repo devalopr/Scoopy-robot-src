@@ -144,7 +144,7 @@ class Behaviour:
     #Image callback
     def callback(self,data):
 
-        rospy.loginfo("Recieving images")
+        #rospy.loginfo("Recieving images")
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
         except CvBridgeError as e:
@@ -283,10 +283,11 @@ if __name__ == '__main__':
     try:
         rospy.init_node('scoopy_behave')
         rospy.loginfo("Initializing Scoopy Behaviour")  
-        rospy.loginfo("Press enter to start the challenge>: \n")
-        
-        input = input("Press enter to start challenge: > ")      
-        
+        while True:
+            rospy.loginfo("After pressing start button in Gazebo, Press any key to start the challenge")
+            input_data = cv2.waitKey(30)   
+            if(input_data):
+                break        
         behave_obj = Behaviour()
         
 
