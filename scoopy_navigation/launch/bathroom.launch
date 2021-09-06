@@ -23,4 +23,7 @@
           args="-d $(find scoopy_navigation)/rviz/rur_navigation.rviz"/>
   </group>
   
+  <node pkg="scoopy_behaviour" name="behave_node" type="behave.py" output="screen"/>
+  
+  
 </launch>

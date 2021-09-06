@@ -230,6 +230,7 @@ if __name__ == '__main__':
     try:
         rospy.init_node('scoopy_behave')
         rospy.loginfo("Initializing Scoopy Behaviour")  
+        rospy.loginfo("Press enter to start the challenge>: ")
         
         input = input("Press enter to start challenge: > ")      
         
