@@ -937,7 +937,7 @@
     <include>
       <uri>model://soap_dispenser</uri>
       <name>soap_1</name>                                       
-	<pose>-3.86564 -2.00809 0.99966 0.000932 -0.001932 -1e-06</pose>
+	  <pose>-4.032237 -1.812556 0.999306 0.000 -0.004538 0</pose>
     </include>
                 
           
