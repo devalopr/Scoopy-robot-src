@@ -25,10 +25,10 @@ class Behaviour:
         #Keeping location points
         self.way_points = {}
 
-        self.way_points["sink_pose"] = [-2.937,-1.9,-3.124]
-        self.way_points["sink_pose_right"] = [-2.937,-1.863,-3.124]
+        self.way_points["sink_pose"] = [-2.9,-1.9,-3.14]
+        self.way_points["sink_pose_right"] = [-2.9,-1.8,-3.14]
 
-        self.way_points["center_pose"] = [-2.405,-1.248,-1.580]
+        self.way_points["center_pose"] = [-2.405,-1.248,3.14]
         self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
 
         #Init movebase
@@ -231,7 +231,7 @@ if __name__ == '__main__':
         rospy.init_node('scoopy_behave')
         rospy.loginfo("Initializing Scoopy Behaviour")  
         
-        input = input("Press enter to start challenge")      
+        input = input("Press enter to start challenge: > ")      
         
         behave_obj = Behaviour()
         
