@@ -62,7 +62,6 @@ class Behaviour:
 
         #pub = rospy.Publisher('topic_name', std_msgs.msg.String, queue_size=10)
 
-
         #pass
         self.behave()
 
@@ -88,16 +87,16 @@ class Behaviour:
 
         #Moving mid arm
         self.move_joint("mid_arm", 0.32)
-        rospy.sleep(3)
+        rospy.sleep(4)
 
         self.move_joint("mid_arm", 0.22)
-        rospy.sleep(3)
+        rospy.sleep(4)
 
         self.move_joint("mid_arm", 0.32)
-        rospy.sleep(3)
+        rospy.sleep(4)
 
         self.move_joint("mid_arm", 0.22)
-        rospy.sleep(3)
+        rospy.sleep(4)
 
         #Goint to init pose
         self.init_pose()
@@ -126,7 +125,7 @@ class Behaviour:
         self.move_joint("outer_arm", 0)
         rospy.sleep(4)
         self.move_joint("post_slider", 0)
-        rospy.sleep(10)
+        rospy.sleep(14)
         rospy.loginfo("Set Robot init pose")
 
     def scan_objects(self):
@@ -139,8 +138,8 @@ class Behaviour:
         rospy.loginfo("Start cleaning couter top")
 
         rospy.loginfo("Extending post slider")
-        self.move_joint("post_slider", 1)
-        rospy.sleep(17)
+        self.move_joint("post_slider", 1.12)
+        rospy.sleep(20)
 
         rospy.loginfo("Extending outer arm")
         self.move_joint("outer_arm", 0.32)
