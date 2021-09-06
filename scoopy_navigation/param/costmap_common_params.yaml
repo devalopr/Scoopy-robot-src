@@ -1,7 +1,7 @@
 robot_radius: 0.25
 
 transform_tolerance: 0.4
-map_type: voxel
+map_type: costmap
 #map_type: costmap
 
 footprint: [[-0.22,-0.28], [-0.22,0.28], [0.55,0.15], [0.55,-0.15]]
@@ -21,7 +21,7 @@ obstacle_layer:
 
 inflation_layer:
   enabled:              true
-  cost_scaling_factor:  2.0  # exponential rate at which the obstacle cost drops off (default: 10)
+  cost_scaling_factor:  10.0  # exponential rate at which the obstacle cost drops off (default: 10)
   inflation_radius:     0.05   # max distance from an obstacle at which costs are incurred for planning paths.
 
 static_layer:
