@@ -164,7 +164,7 @@ class Behaviour:
         cv2.drawContours(cv_image,conts,-1,(255,0,0),3)
         for i in range(len(conts)):
             x,y,w,h=cv2.boundingRect(conts[i])
-            print("X:",(2*x+w)/2,"Y:",(2*x+h)/2)
+            #print("X:",(2*x+w)/2,"Y:",(2*x+h)/2)
             cv2.rectangle(cv_image,(x,y),(x+w,y+h),(0,0,255), 2)
             self.trash_pose_x = (2*x+w)/2
             self.trash_pose_y = (2*x+h)/2
