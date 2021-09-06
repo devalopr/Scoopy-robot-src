@@ -66,6 +66,8 @@ class Behaviour:
 
 
     def behave(self):
+        rospy.loginfo("Setting the robot init pose")
+        self.init_pose()
         rospy.loginfo("Moving near to sink")
         self.move_location("sink_pose")
         rospy.loginfo("Completed sink pose movement")
@@ -73,16 +75,26 @@ class Behaviour:
         rospy.loginfo("Moving post slider up")
         self.move_joint("post_slider", 1)
         rospy.sleep(15)
-        rospy.loginf0("Completed post slider movement")
-
+        rospy.loginfo("Completed post slider movement")
+        self.init_pose();
 
         #self.move_location("center_pose")
         #self.move_location("exit_pose")
 
     def init_pose(self):
         rospy.loginfo("Moving to inital arm configuration")
-        self.move_joint("post_slider", 1)
 
+        self.move_joint("lid", 0)
+        rospy.sleep(4)
+        self.move_joint("tool_head", -1.6)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0)
+        rospy.sleep(4)
+        self.move_joint("outer_arm", 0)
+        rospy.sleep(4)
+        self.move_joint("post_slider", 0)
+        rospy.sleep(10)
+        rospy.loginfo("Set Robot init pose")
 
 
     def move_location(self,location_name):
