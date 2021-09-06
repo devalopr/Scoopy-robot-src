@@ -337,8 +337,10 @@ class Behaviour:
         if not wait:
             rospy.logerr("Action server not available!")
             rospy.signal_shutdown("Action server not available!")
+            pass
         else:
             return self.client.get_result()
+            pass
 
 
 
