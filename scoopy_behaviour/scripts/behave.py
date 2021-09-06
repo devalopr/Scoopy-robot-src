@@ -5,12 +5,15 @@ import rospy
 import rospy
 import actionlib
 
-import cv2
+import sys
+
 from std_msgs.msg import String
 from std_msgs.msg import Float64
 
+import cv2
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
+import numpy as np
 
 from std_msgs.msg import Float64
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
@@ -25,11 +28,26 @@ class Behaviour:
         #Keeping location points
         self.way_points = {}
 
+        self.bridge = CvBridge()
+
+        self.lowerBound=np.array([0,50,50])
+        self.upperBound=np.array([10,255,255])
+        self.kernelOpen=np.ones((5,5))
+        self.kernelClose=np.ones((20,20))
+
+        self.trash_pose_x = 0
+        self.trash_pose_y = 0
+
+
+
         self.way_points["sink_pose"] = [-2.9,-1.9,-3.14]
         self.way_points["sink_pose_right"] = [-2.9,-1.8,-3.14]
 
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
         self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
+
+
+
 
         #Init movebase
         self.client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
@@ -56,6 +74,11 @@ class Behaviour:
         self.mid_joint = rospy.Publisher(self.topic_name["mid_arm"],Float64,queue_size=10)
         self.lid_joint = rospy.Publisher(self.topic_name["lid"],Float64,queue_size=10)
         self.tool_head_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
+
+        #Image processing
+        self.processed_pub = rospy.Publisher("detected_img",Image)
+        self.image_sub = rospy.Subscriber("/scooopy/camera1/image_raw",Image,self.callback)
+
         
         #self.post_joint = rospy.Publisher(self.topic_name["post_slider"],Float64,queue_size=10)
         #self.post_joint = rospy.Publisher(self.topic_name["post_slider"],Float64,queue_size=10)
@@ -118,6 +141,36 @@ class Behaviour:
         self.move_location("exit_pose")
 
 
+    #Image callback
+    def callback(self,data):
+
+        rospy.loginfo("Recieving images")
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+        except CvBridgeError as e:
+            print(e)
+
+        imgHSV= cv2.cvtColor(cv_image,cv2.COLOR_BGR2HSV)
+        mask=cv2.inRange(imgHSV,self.lowerBound,self.upperBound)
+        maskOpen=cv2.morphologyEx(mask,cv2.MORPH_OPEN,self.kernelOpen)
+        maskClose=cv2.morphologyEx(maskOpen,cv2.MORPH_CLOSE,self.kernelClose)
+        maskFinal=maskClose
+        conts,h=cv2.findContours(maskFinal.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+        cv2.drawContours(cv_image,conts,-1,(255,0,0),3)
+        for i in range(len(conts)):
+            x,y,w,h=cv2.boundingRect(conts[i])
+            print("X:",(2*x+w)/2,"Y:",(2*x+h)/2)
+            cv2.rectangle(cv_image,(x,y),(x+w,y+h),(0,0,255), 2)
+            self.trash_pose_x = (2*x+w)/2
+            self.trash_pose_y = (2*x+h)/2
+
+        #cv2.imshow("Image window",cv_image)
+        #cv2.waitKey(3)
+
+        try:
+            self.processed_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
+        except CvBridgeError as e:
+            print(e)
 
 
     def init_pose(self):
