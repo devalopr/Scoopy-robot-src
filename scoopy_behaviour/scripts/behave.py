@@ -24,8 +24,8 @@ class Behaviour:
 
         #Keeping location points
         self.way_points = {}
-        
-        self.way_points["sink_pose"] = [-2.837,-2,-3.124]
+
+        self.way_points["sink_pose"] = [-2.937,-2.1,-3.124]
         self.way_points["sink_pose_right"] = [-2.837,-1.763,-3.124]
 
         self.way_points["center_pose"] = [-2.405,-1.248,1.580]
@@ -84,8 +84,23 @@ class Behaviour:
 
         #Moving right to sink
         rospy.loginfo("Moving right to sink")
-        self.move_location("sink_pose")
+        self.move_location("sink_pose_right")
 
+        #Moving mid arm
+        self.move_joint("mid_arm", 0.32)
+        rospy.sleep(3)
+
+        self.move_joint("mid_arm", 0.22)
+        rospy.sleep(3)
+
+        self.move_joint("mid_arm", 0.32)
+        rospy.sleep(3)
+
+        self.move_joint("mid_arm", 0.22)
+        rospy.sleep(3)
+
+        #Goint to init pose
+        self.init_pose()
 
 
         #self.move_location("center_pose")
