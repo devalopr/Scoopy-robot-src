@@ -120,13 +120,10 @@ class Behaviour:
         #Moving mid arm
         self.move_joint("mid_arm", 0.32)
         rospy.sleep(4)
-
         self.move_joint("mid_arm", 0.22)
         rospy.sleep(4)
-
         self.move_joint("mid_arm", 0.32)
         rospy.sleep(4)
-
         self.move_joint("mid_arm", 0.22)
         rospy.sleep(4)
 
