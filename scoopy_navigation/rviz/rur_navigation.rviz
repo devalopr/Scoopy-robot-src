@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Global Options1
         - /Status1
         - /Local Map1/Local Costmap1
         - /Local Map1/Local Planner Path1
@@ -374,7 +375,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: odom
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -398,7 +399,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10.640828132629395
+      Distance: 9.09618854522705
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -406,17 +407,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.07835373282432556
-        Y: -0.5158835053443909
-        Z: -0.8905698657035828
+        X: -2.6861720085144043
+        Y: -0.8135653138160706
+        Z: -0.8006362915039062
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3047962188720703
+      Pitch: 1.359796404838562
       Target Frame: <Fixed Frame>
-      Yaw: 0.08858772367238998
+      Yaw: 6.1467719078063965
     Saved: ~
 Window Geometry:
   Displays:
