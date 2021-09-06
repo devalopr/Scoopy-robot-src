@@ -76,7 +76,7 @@ class Behaviour:
         self.move_joint("post_slider", 1)
         rospy.sleep(15)
         rospy.loginfo("Completed post slider movement")
-        self.init_pose();
+        self.init_pose()
 
         #self.move_location("center_pose")
         #self.move_location("exit_pose")
