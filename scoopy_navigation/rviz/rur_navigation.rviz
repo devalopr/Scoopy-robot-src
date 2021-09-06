@@ -7,6 +7,7 @@ Panels:
         - /Status1
         - /Local Map1/Local Costmap1
         - /Local Map1/Local Planner Path1
+        - /local_planner1
       Splitter Ratio: 0.5
     Tree Height: 590
   - Class: rviz/Selection
@@ -261,7 +262,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /move_base/GlobalPlanner/plan
+      Topic: /move_base/DWAPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Class: rviz/Group
@@ -370,7 +371,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /move_base/TebLocalPlannerROS/local_plan
+      Topic: /move_base/DWAPlannerROS/local_plan
       Unreliable: false
       Value: true
   Enabled: true
@@ -401,7 +402,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.770696640014648
+      Distance: 4.243913650512695
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -409,9 +410,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -1.716045618057251
-        Y: -0.5459067225456238
-        Z: -0.4309239685535431
+        X: -1.5821548700332642
+        Y: 0.2007836401462555
+        Z: -0.4376651644706726
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
