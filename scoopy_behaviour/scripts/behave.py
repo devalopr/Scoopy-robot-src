@@ -30,8 +30,9 @@ class Behaviour:
 
         self.bridge = CvBridge()
 
-        self.lowerBound=np.array([0,50,50])
-        self.upperBound=np.array([10,255,255])
+
+        self.lowerBound=np.array([149,199,69])
+        self.upperBound=np.array([179,255,255])
 
         self.kernelOpen=np.ones((5,5))
         self.kernelClose=np.ones((20,20))
@@ -46,6 +47,7 @@ class Behaviour:
 
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
         self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
+        self.way_points["exit_pose_prev"] = [-2.405, -1.248,1.580]
 
 
 
@@ -138,6 +140,8 @@ class Behaviour:
         self.scan_objects()
 
         #Exiting the room
+        self.move_location("exit_pose_prev")
+        rospy.sleep(4)
         self.move_location("exit_pose")
 
 
@@ -149,6 +153,7 @@ class Behaviour:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
         except CvBridgeError as e:
             print(e)
+            pass
 
         imgHSV= cv2.cvtColor(cv_image,cv2.COLOR_BGR2HSV)
         mask=cv2.inRange(imgHSV,self.lowerBound,self.upperBound)
@@ -171,6 +176,7 @@ class Behaviour:
             self.processed_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
         except CvBridgeError as e:
             print(e)
+            pass
 
 
     def init_pose(self):
@@ -191,6 +197,14 @@ class Behaviour:
     def scan_objects(self):
         rospy.loginfo("Scanning for trash")
         rospy.sleep(3)
+
+        map_coord = self.way_points["center_pose"]
+        for i in range(-3,3):
+            rospy.sleep(4)
+            rospy.loginfo("Rotating Angle>",i)
+            rospy.loginfo("Trash Found:pose_x:"+self.trash_pose_x+" pose_y:"+ self.trash_pose_y )
+            self.send_movebase_pose(map_coord[0],map_coord[1],i)
+       
 
 
     #Assume robot is in init state
