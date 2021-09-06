@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<sdf version='1.7'>
+  <model name="marking">
+    <static>true</static>
+    <link name="link">
+ <!--   
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://marking/meshes/marking.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+ -->     
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://marking/meshes/marking.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <lighting>1</lighting>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+          <shader type='pixel'>
+            <normal_map>__default__</normal_map>
+          </shader>
+          <ambient>0.988 0.914 0.31 1</ambient>
+          <diffuse>0.7 0.7 0.7 1</diffuse>
+          <specular>0.01 0.01 0.01 1</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+                
+      </visual>
+    </link>
+  </model>
+</sdf>

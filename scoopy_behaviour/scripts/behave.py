@@ -78,7 +78,7 @@ class Behaviour:
         self.tool_head_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
 
         #Image processing
-        self.processed_pub = rospy.Publisher("detected_img",Image)
+        self.processed_pub = rospy.Publisher("detected_img",Image,queue_size=10)
         self.image_sub = rospy.Subscriber("/scooopy/camera1/image_raw",Image,self.callback)
 
         
@@ -195,6 +195,28 @@ class Behaviour:
         rospy.sleep(14)
         rospy.loginfo("Set Robot init pose")
 
+    def scan_arm(self):
+        self.move_joint("outer_arm", 0.2)
+        rospy.sleep(4)
+
+        #self.move_joint("mid_arm", 0.26)
+        #rospy.sleep(4)
+
+        self.move_joint("lid", 4.6)
+        rospy.sleep(4)
+
+        self.move_joint("lid", 0)
+        rospy.sleep(4)
+
+        self.move_joint("outer_arm", 0)
+        rospy.sleep(4)
+
+        self.move_joint("mid_arm", 0)
+        rospy.sleep(4)
+
+        self.move_joint("lid", 0)
+        rospy.sleep(4)
+
     def scan_objects(self):
         rospy.loginfo("Scanning for trash")
         rospy.sleep(3)
@@ -205,6 +227,7 @@ class Behaviour:
             rospy.loginfo("Rotating Angle>"+str(i))
             rospy.loginfo("Trash Found:pose_x:"+str(self.trash_pose_x)+" pose_y:"+ str(self.trash_pose_y))
             self.send_movebase_pose(map_coord[0],map_coord[1],i)
+            self.scan_arm()
        
 
 
