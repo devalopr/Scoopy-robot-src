@@ -32,7 +32,7 @@
   </gazebo>
 
  <gazebo reference="lidar_1">
-    <sensor type="gpu_ray" name="rplidar_a1">
+    <sensor type="ray" name="rplidar_a1">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
       <update_rate>10</update_rate>
@@ -56,7 +56,7 @@
           <stddev>0.001</stddev>
         </noise>
       </ray>
-      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
         <topicName>/scan</topicName>
         <frameName>lidar_1</frameName>
       </plugin>
