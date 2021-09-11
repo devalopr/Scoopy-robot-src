@@ -6,9 +6,9 @@
 <xacro:include filename="$(find scoopy_description)/urdf/scoopy.gazebo" />
 <link name="base_link">
   <inertial>
-    <origin rpy="0 0 0" xyz="-1.7351421851954884e-16 1.3881137481563907e-16 0.11331032359466348"/>
-    <mass value="35.55911503662973"/>
-    <inertia ixx="0.662233" ixy="0.0" ixz="-0.0" iyy="0.560224" iyz="0.0" izz="0.990291"/>
+    <origin rpy="0 0 0" xyz="-1.3881137481563912e-16 1.3881137481563912e-16 0.11331032359466349"/>
+    <mass value="35.55911503662972"/>
+    <inertia ixx="0.662233" ixy="0.0" ixz="0.0" iyy="0.560224" iyz="0.0" izz="0.990291"/>
   </inertial>
   <visual>
     <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -27,9 +27,9 @@
 
 <link name="post_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="5.856911602953536e-17 -0.075 0.5999999999999998"/>
-    <mass value="2.934900000000002"/>
-    <inertia ixx="0.356822" ixy="-0.0" ixz="-0.0" iyy="0.358514" iyz="-0.0" izz="0.002"/>
+    <origin rpy="0 0 0" xyz="6.693613260518336e-17 -0.07500000000000001 0.6000000000000001"/>
+    <mass value="2.934899999999997"/>
+    <inertia ixx="0.356822" ixy="0.0" ixz="-0.0" iyy="0.358514" iyz="-0.0" izz="0.002"/>
   </inertial>
   <visual>
     <origin rpy="0 0 0" xyz="0.0 -0.0 -0.21"/>
@@ -48,8 +48,8 @@
 
 <link name="blw_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="2.238764729156628e-12 0.02499999962857047 3.0118962879299715e-12"/>
-    <mass value="0.3951430907919231"/>
+    <origin rpy="0 0 0" xyz="2.2386537068541656e-12 0.02499999962857044 3.01187547124826e-12"/>
+    <mass value="0.39514309079192295"/>
     <inertia ixx="0.000315" ixy="0.0" ixz="0.0" iyy="0.00047" iyz="-0.0" izz="0.000315"/>
   </inertial>
   <visual>
@@ -69,8 +69,8 @@
 
 <link name="flw_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="-2.2386537068541656e-12 0.02499999962857022 3.011847715672644e-12"/>
-    <mass value="0.3951430907919234"/>
+    <origin rpy="0 0 0" xyz="-2.238764729156628e-12 0.024999999628570274 3.011861593460452e-12"/>
+    <mass value="0.39514309079192345"/>
     <inertia ixx="0.000315" ixy="-0.0" ixz="-0.0" iyy="0.00047" iyz="-0.0" izz="0.000315"/>
   </inertial>
   <visual>
@@ -90,8 +90,8 @@
 
 <link name="brw_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="-2.1991575227531257e-12 -0.025000000151654767 3.10280273696506e-12"/>
-    <mass value="0.3951430495514468"/>
+    <origin rpy="0 0 0" xyz="-2.1991575227531257e-12 -0.02500000015165485 3.1027957980711562e-12"/>
+    <mass value="0.39514304955144675"/>
     <inertia ixx="0.000315" ixy="-0.0" ixz="-0.0" iyy="0.00047" iyz="0.0" izz="0.000315"/>
   </inertial>
   <visual>
@@ -111,8 +111,8 @@
 
 <link name="frw_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="2.1990187448750476e-12 -0.02500000015165471 3.1027541647077328e-12"/>
-    <mass value="0.395143049551447"/>
+    <origin rpy="0 0 0" xyz="2.1991020116018944e-12 -0.025000000151654544 3.1027680424955406e-12"/>
+    <mass value="0.39514304955144725"/>
     <inertia ixx="0.000315" ixy="0.0" ixz="0.0" iyy="0.00047" iyz="0.0" izz="0.000315"/>
   </inertial>
   <visual>
@@ -132,8 +132,8 @@
 
 <link name="teslecope_outer_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.0048668663184327525 0.06003062430127151 0.035252402260311955"/>
-    <mass value="0.7345811625725649"/>
+    <origin rpy="0 0 0" xyz="0.00486686631843313 0.06003062430127173 0.03525240226031212"/>
+    <mass value="0.7345811625725633"/>
     <inertia ixx="0.002063" ixy="0.000488" ixz="-2.1e-05" iyy="0.009276" iyz="9e-06" izz="0.010304"/>
   </inertial>
   <visual>
@@ -153,19 +153,19 @@
 
 <link name="telescope_mid_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.1975000000000001 2.7791557923582445e-17 0.029999999999999888"/>
-    <mass value="0.4336138633043534"/>
-    <inertia ixx="0.000423" ixy="0.0" ixz="0.0" iyy="0.005849" iyz="-0.0" izz="0.005849"/>
+    <origin rpy="0 0 0" xyz="0.19750000000000004 3.890818109301545e-17 0.03"/>
+    <mass value="0.4336138633043531"/>
+    <inertia ixx="0.000423" ixy="0.0" ixz="0.0" iyy="0.005849" iyz="0.0" izz="0.005849"/>
   </inertial>
   <visual>
-    <origin rpy="0 0 0" xyz="0.195 -0.0 -0.215"/>
+    <origin rpy="0 0 0" xyz="0.195 0.0 -0.215"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/telescope_mid_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin rpy="0 0 0" xyz="0.195 -0.0 -0.215"/>
+    <origin rpy="0 0 0" xyz="0.195 0.0 -0.215"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/telescope_mid_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -174,19 +174,19 @@
 
 <link name="telescope_inner_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.2706447819087414 -2.23064917104918e-08 0.023808229439092693"/>
-    <mass value="0.541417155546655"/>
-    <inertia ixx="0.00047" ixy="0.0" ixz="0.000119" iyy="0.012934" iyz="-0.0" izz="0.012912"/>
+    <origin rpy="0 0 0" xyz="0.28166216034704594 -2.5972465324787718e-08 0.023861399579124587"/>
+    <mass value="0.566702462514632"/>
+    <inertia ixx="0.000504" ixy="0.0" ixz="0.000112" iyy="0.014419" iyz="-0.0" izz="0.014397"/>
   </inertial>
   <visual>
-    <origin rpy="0 0 0" xyz="0.195 -0.0 -0.22"/>
+    <origin rpy="0 0 0" xyz="0.195 0.0 -0.22"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/telescope_inner_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin rpy="0 0 0" xyz="0.195 -0.0 -0.22"/>
+    <origin rpy="0 0 0" xyz="0.195 0.0 -0.22"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/telescope_inner_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -195,9 +195,9 @@
 
 <link name="scooper_main_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.08362226725830774 -1.037794310709894e-08 -0.12089075901099068"/>
-    <mass value="0.7468819312855505"/>
-    <inertia ixx="0.004154" ixy="-0.0" ixz="0.000435" iyy="0.00791" iyz="-0.0" izz="0.006529"/>
+    <origin rpy="0 0 0" xyz="0.08092508837262535 -1.0539086043948146e-08 -0.12225840583681827"/>
+    <mass value="0.7354620730651008"/>
+    <inertia ixx="0.004063" ixy="-0.0" ixz="0.000612" iyy="0.007462" iyz="-0.0" izz="0.006171"/>
   </inertial>
   <visual>
     <origin rpy="0 0 0" xyz="-0.26 -0.0 -0.2"/>
@@ -214,8 +214,6 @@
   </collision>
 </link>
 
-
-<!--
 <link name="vacuum_1">
   <inertial>
     <origin rpy="0 0 0" xyz="1.316169395693123e-13 -2.1186220889083034e-15 0.002499999999999988"/>
@@ -238,10 +236,10 @@
   </collision>
   
 </link>
--->
+
 <link name="sprayer_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="3.219646771412954e-15 -2.1323066842246274e-15 0.002499999999999988"/>
+    <origin rpy="0 0 0" xyz="3.219646771412954e-15 -2.0719939435983563e-15 0.002499999999999988"/>
     <mass value="0.000936587309851457"/>
     <inertia ixx="0.0" ixy="-0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
   </inertial>
@@ -262,9 +260,9 @@
 
 <link name="lid_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.002355106468506951 0.049999999999999954 -0.08204284760698533"/>
-    <mass value="0.0768228903550606"/>
-    <inertia ixx="0.000251" ixy="0.0" ixz="1e-06" iyy="0.000178" iyz="-0.0" izz="7.4e-05"/>
+    <origin rpy="0 0 0" xyz="0.0023329144952143888 0.050000000000000065 -0.07605260689634684"/>
+    <mass value="0.08879847467817195"/>
+    <inertia ixx="0.00028" ixy="0.0" ixz="1e-06" iyy="0.000206" iyz="-0.0" izz="7.4e-05"/>
   </inertial>
   <visual>
     <origin rpy="0 0 0" xyz="-0.48 0.05 -0.165"/>
@@ -283,8 +281,8 @@
 
 <link name="camera_rotator_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="3.936372822672995e-15 0.01778512822674201 -0.03706116149026073"/>
-    <mass value="0.01940387423940479"/>
+    <origin rpy="0 0 0" xyz="3.911142606330705e-15 0.017785128226742025 -0.03706116149026073"/>
+    <mass value="0.0194038742394048"/>
     <inertia ixx="2.2e-05" ixy="-0.0" ixz="0.0" iyy="2.1e-05" iyz="3e-06" izz="3e-06"/>
   </inertial>
   <visual>
@@ -304,8 +302,8 @@
 
 <link name="realsense_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.0031990044720235974 -0.020000113475681897 -4.398305875064068e-07"/>
-    <mass value="0.2907983092572743"/>
+    <origin rpy="0 0 0" xyz="0.0031990044720235484 -0.020000113475681897 -4.398305875064068e-07"/>
+    <mass value="0.29079830925727457"/>
     <inertia ixx="0.000399" ixy="-0.0" ixz="0.0" iyy="0.000437" iyz="-0.0" izz="0.000112"/>
   </inertial>
   <visual>
@@ -325,7 +323,7 @@
 
 <link name="hat_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="3.670586380832928e-15 0.09525941907785548 0.014973792021365284"/>
+    <origin rpy="0 0 0" xyz="3.677005365676489e-15 0.09525941907785543 0.014973792021365284"/>
     <mass value="0.18773692557600277"/>
     <inertia ixx="0.000906" ixy="-0.0" ixz="0.0" iyy="0.000223" iyz="0.0" izz="0.001074"/>
   </inertial>
@@ -346,9 +344,9 @@
 
 <link name="lidar_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="-2.7755575615628914e-17 -1.3877787807814457e-16 0.009717213114754153"/>
+    <origin rpy="0 0 0" xyz="2.7755575615628914e-17 -1.249000902703301e-16 0.009717213114754153"/>
     <mass value="0.08463974207546501"/>
-    <inertia ixx="3e-05" ixy="0.0" ixz="-0.0" iyy="3e-05" iyz="0.0" izz="5.4e-05"/>
+    <inertia ixx="3e-05" ixy="-0.0" ixz="0.0" iyy="3e-05" iyz="-0.0" izz="5.4e-05"/>
   </inertial>
   <visual>
     <origin rpy="0 0 0" xyz="-0.12 0.075 -0.285"/>
@@ -367,19 +365,19 @@
 
 <link name="camera_1">
   <inertial>
-    <origin rpy="0 0 0" xyz="0.002000000000788038 -3.809232767814862e-18 -0.0004999999999998339"/>
-    <mass value="0.00018731746197030155"/>
-    <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    <origin rpy="0 0 0" xyz="-0.0004999999999967808 -7.84200703550174e-13 -4.2567708755103517e-07"/>
+    <mass value="0.00018731746197030215"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="-0.0" iyy="0.0" iyz="-0.0" izz="0.0"/>
   </inertial>
   <visual>
-    <origin rpy="0 0 0" xyz="-0.5525 0.0 -0.165"/>
+    <origin rpy="0 0 0" xyz="-0.48 -0.0 -0.083102"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin rpy="0 0 0" xyz="-0.5525 0.0 -0.165"/>
+    <origin rpy="0 0 0" xyz="-0.48 -0.0 -0.083102"/>
     <geometry>
       <mesh filename="package://scoopy_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -452,22 +450,20 @@
   <limit effort="20" lower="-1.570796" upper="1.570796" velocity="20"/>
 </joint>
 
-<!--
-<joint name="vacuum_rigid" type="revolute">
-  <origin rpy="0 0 0" xyz="0.2 -0.0 -0.2"/>
+<joint name="vacuum_rigid" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 -0.0 -0.2"/>
   <parent link="scooper_main_1"/>
   <child link="vacuum_1"/>
-  <limit effort="30" velocity="1.0" lower="0" upper="0" />  
 </joint>
--->
+
 <joint name="sprayer_rigid" type="fixed">
-  <origin rpy="0 0 0" xyz="0.2 -0.0 -0.2"/>
+  <origin rpy="0 0 0" xyz="0.0 -0.0 -0.2"/>
   <parent link="scooper_main_1"/>
   <child link="sprayer_1"/>
 </joint>
 
 <joint name="lid_revolute" type="continuous">
-  <origin rpy="0 1.57 0" xyz="0.22 -0.05 -0.035"/>
+  <origin rpy="0 0 0" xyz="0.22 -0.05 -0.035"/>
   <parent link="scooper_main_1"/>
   <child link="lid_1"/>
   <axis xyz="0.0 1.0 0.0"/>
@@ -499,9 +495,9 @@
   <child link="lidar_1"/>
 </joint>
 
-<joint name="Rigid27" type="fixed">
-  <origin rpy="0 0 0" xyz="0.2925 -0.0 -0.035"/>
-  <parent link="scooper_main_1"/>
+<joint name="Rigid28" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.05 -0.081898"/>
+  <parent link="lid_1"/>
   <child link="camera_1"/>
 </joint>
 
