@@ -889,7 +889,7 @@
     <include>
       <uri>model://paper_cup</uri>
       <name>paper_cup1</name>                                       
-	<pose>-3.08013 -2.19304 0.007713 -0.314201 0.033169 0.006683</pose>
+	<pose>-3.08013 -2.19304 0.007713 0 0.0 0.0</pose>
     </include>
 
 <!--

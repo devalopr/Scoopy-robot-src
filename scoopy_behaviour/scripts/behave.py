@@ -46,10 +46,11 @@ class Behaviour:
 
 
         self.way_points["sink_pose"] = [-2.9,-1.9,-3.14]
-        self.way_points["sink_pose_right"] = [-2.9,-1.8,-3.14]
+        self.way_points["sink_pose_mid"] = [-2.9,-1.65,-3.14]
+        self.way_points["sink_pose_right"] = [-2.9,-1.3,-3.14]
 
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
-        self.way_points["exit_pose"] = [-0.008, -1.395,3.094]
+        self.way_points["exit_pose"] = [-0.008, -1.,3.14]
         self.way_points["exit_pose_prev"] = [-2.355, -0.048,0.042]
 
 
@@ -120,20 +121,12 @@ class Behaviour:
         rospy.loginfo("Start cleaning counter")
         self.start_cleaning_couter()
 
-        #Moving right to sink
+        #Moving to the sink
         rospy.loginfo("Moving right to sink")
-        self.move_location("sink_pose_right")
+        self.move_location("sink_pose_mid")
 
-        #Moving mid arm
-        self.move_joint("mid_arm", 0.32)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.22)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.32)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.22)
-        rospy.sleep(4)
-
+        self.clean_sink()
+        
         #Goint to init pose
         self.init_pose()
 
@@ -266,10 +259,10 @@ class Behaviour:
 
     #Assume robot is in init state
     def start_cleaning_couter(self):
-        rospy.loginfo("Start cleaning couter top")
+        rospy.loginfo("Started cleaning couter top")
 
         rospy.loginfo("Extending post slider")
-        self.move_joint("post_slider", 1.06)
+        self.move_joint("post_slider", 1.02)
         rospy.sleep(20)
 
         rospy.loginfo("Extending outer arm")
@@ -306,8 +299,33 @@ class Behaviour:
         self.publish_marker(-3.53, -1.9)
 
 
-        rospy.loginfo("Completed cleaning of counter top")
+        rospy.loginfo("Completed cleaning counter top")
 
+    def clean_sink(self):
+        
+        rospy.loginfo("Started cleaning sink")
+        
+        self.move_joint("mid_arm", 0.32)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0.22)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0.32)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0.22)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0)
+        rospy.sleep(4)
+        self.move_location("sink_pose_right")
+        self.move_joint("mid_arm", 0.32)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0.22)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0.32)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0.22)
+        rospy.sleep(4)
+        self.move_joint("mid_arm", 0)
+        rospy.sleep(4)
 
 
     def move_location(self,location_name):
