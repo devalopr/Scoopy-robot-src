@@ -4,13 +4,12 @@
   
 
   <!-- Robot pose -->
-  <arg name="x" default="0"/>
-  <arg name="y" default="0"/>
+  <arg name="x" default="-2.406438"/>
+  <arg name="y" default="-3.847356"/>
   <arg name="z" default="0"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
-  <arg name="yaw" default="-3.14"/>
-
+  <arg name="yaw" default="1.571086"/>
   
 
   <env name="GAZEBO_MODEL_PATH" value="$(find scoopy_description)/models/" />

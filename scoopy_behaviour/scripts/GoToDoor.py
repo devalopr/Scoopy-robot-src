@@ -27,7 +27,7 @@ class Go:
         roslaunch.configure_logging(uuid)
 
         rospack = rospkg.RosPack()
-        nav_pkg_path = rospack.get_path('scoopy_navigation')+str("/launch/bathroom_bringup.launch")
+        nav_pkg_path = rospack.get_path('scoopy_navigation')+str("/launch/bathroom_bringup_nav.launch")
 
         rospy.loginfo("Navigation launch file path"+nav_pkg_path)
 
