@@ -477,7 +477,7 @@
 </joint>
 
 <joint name="camera_tilt" type="continuous">
-  <origin rpy="0 0 0" xyz="0.0 0.02 -0.085"/>
+  <origin rpy="0 1 0" xyz="0.0 0.02 -0.085"/>
   <parent link="camera_rotator_1"/>
   <child link="realsense_1"/>
   <axis xyz="0.0 -1.0 0.0"/>

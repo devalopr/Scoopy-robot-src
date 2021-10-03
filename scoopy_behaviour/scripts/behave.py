@@ -123,7 +123,7 @@ class Behaviour:
 
     def behave(self):                              #main function
         self.move_joint("camera_tilt",-1)
-        rospy.sleep(2)
+        rospy.sleep(4)
         self.move_joint("tool_head", -1.57)
         rospy.sleep(2)
         rospy.loginfo("Moving inside")
