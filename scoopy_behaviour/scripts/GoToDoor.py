@@ -39,7 +39,12 @@ class Go:
     def main(self):
         rospy.sleep(2)
         self.tool_head_joint.publish(-1.57)
-        self.go_to_door()
+
+        if(abs(self.x + self.y) > 1):
+            self.go_to_door()
+
+
+        #self.go_to_door()
         print("LAUNCHING NAVIGATION STACK...")
         self.launch.start()
         rospy.spin()

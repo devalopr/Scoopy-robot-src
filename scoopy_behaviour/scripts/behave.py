@@ -96,13 +96,12 @@ class Behaviour:
 
 
 
-
         self.post_joint = rospy.Publisher(self.topic_name["post_slider"],Float64,queue_size=10)
         self.outer_joint = rospy.Publisher(self.topic_name["outer_arm"],Float64,queue_size=10)
         self.mid_joint = rospy.Publisher(self.topic_name["mid_arm"],Float64,queue_size=10)
         self.lid_joint = rospy.Publisher(self.topic_name["lid"],Float64,queue_size=10)
         self.tool_head_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
-        self.camera_tilt_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
+        self.camera_tilt_joint = rospy.Publisher(self.topic_name["camera_tilt"],Float64,queue_size=10)
 
         self.cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size = 10)
         self.scan = rospy.Subscriber('/scan', LaserScan, self.scan_callback)
@@ -142,6 +141,8 @@ class Behaviour:
 
         #Move to center
         self.move_location("center_pose")
+
+        rospy.sleep(4)
         #Scanning object around the robot      
         self.scan_objects()
         rospy.sleep(4)
@@ -266,11 +267,10 @@ class Behaviour:
 
 
     def scan_arm(self):
-        self.move_joint("outer_arm", 0.2)
-        rospy.sleep(4)
 
-        #self.move_joint("mid_arm", 0.26)
-        #rospy.sleep(4)
+        self.move_joint("tool_head", 0)
+        rospy.sleep(4)
+        self.move_joint("arm", 0.2)
 
         self.move_joint("lid", 4.6)
         rospy.sleep(4)
@@ -278,11 +278,11 @@ class Behaviour:
         self.move_joint("lid", 0)
         rospy.sleep(4)
 
-        self.move_joint("outer_arm", 0)
+        self.move_joint("arm", 0)
         rospy.sleep(4)
 
-        self.move_joint("mid_arm", 0)
-        rospy.sleep(4)
+        #self.move_joint("mid_arm", 0)
+        #rospy.sleep(4)
 
         self.move_joint("lid", 0)
         rospy.sleep(4)

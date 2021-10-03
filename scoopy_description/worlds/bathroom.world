@@ -862,13 +862,13 @@
     <include>
       <uri>model://bot_bin</uri>
       <name>bin_1</name>                                       
-	<pose>-3.562247 0.089099 0.000002 -0.000051 0.000031 0.036442</pose>
+	<pose>-3.565656 0.182616 -0.000003 -0.000051 0.000031 0.036442</pose>
     </include>
 
     <include>
       <uri>model://human_bin</uri>
       <name>bin_2</name>                                       
-	<pose>-1.322149 -0.566017 0 0 -0.000004 -0.022300</pose>
+	<pose>-4.031028 -2.227502 -0.000011 0 -0.00000 -0.022300</pose>
     </include>
                 
 
