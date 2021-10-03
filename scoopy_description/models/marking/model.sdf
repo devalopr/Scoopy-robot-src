@@ -1,19 +1,25 @@
-<?xml version="1.0" ?>
+<?xml version='1.0'?>
 <sdf version='1.7'>
-  <model name="marking">
-    <static>true</static>
-    <link name="link">
- <!--   
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <scale>0.001 0.001 0.001</scale>
-            <uri>model://marking/meshes/marking.stl</uri>
-          </mesh>
-        </geometry>
-      </collision>
- -->     
-      <visual name="visual">
+  <model name='marking'>
+    <link name='link'>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <pose>0 0 0 0 -0 0</pose>
+      <gravity>1</gravity>
+      <inertial>
+        <mass>1</mass>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <visual name='visual'>
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
@@ -29,13 +35,17 @@
           <shader type='pixel'>
             <normal_map>__default__</normal_map>
           </shader>
-          <ambient>0.988 0.914 0.31 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
+          <ambient>1 0.961 0 1</ambient>
+          <diffuse>1 0.961 0 1</diffuse>
           <specular>0.01 0.01 0.01 1</specular>
           <emissive>0 0 0 1</emissive>
         </material>
-                
+        <pose>0 0 0 0 -0 0</pose>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
       </visual>
     </link>
+    <static>1</static>
+    <allow_auto_disable>1</allow_auto_disable>
   </model>
 </sdf>

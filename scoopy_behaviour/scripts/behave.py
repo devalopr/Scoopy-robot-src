@@ -45,8 +45,8 @@ class Behaviour:
         self.blue_upperBound=np.array([158,220,255])
 
         #Yellow threshold
-        self.yellow_lowerBound=np.array([13,68,195])
-        self.yellow_upperBound=np.array([164,126,255])
+        self.yellow_lowerBound=np.array([15,8,255])
+        self.yellow_upperBound=np.array([77,255,255])
 
         #Orange threshold
         self.orange_lowerBound=np.array([0,219,0])
