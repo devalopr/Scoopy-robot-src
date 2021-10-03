@@ -811,5 +811,106 @@
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
+    
+    
+    
+    
+    
+    <light type="directional" name="bathroom_light">
+
+
+      <pose>-2.631701 -0.670522 2.511903 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>800</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.109764 0.109764 -0.987878</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+<!-- Adding models -->    
+    <include>
+      <uri>model://can</uri>
+      <name>can_1</name>                                    
+      
+	<pose>-3.287298 -1.002290 -0.002823 -0.062829 -0.005948 -0.003219</pose>
+    </include>
+
+    <include>
+      <uri>model://can</uri>
+      <name>can_2</name>                                       
+	<pose>-3.0 -1.002290 -0.002823 -0.062829 -0.005948 -0.003219</pose>
+    </include>
+
+
+    <include>
+      <uri>model://paper_cup</uri>
+      <name>paper_cup1</name>                                       
+	<pose>-3.08013 -2.19304 0.007713 0 0.0 0.0</pose>
+    </include>
+
+
+
+
+    <include>
+      <uri>model://bot_bin</uri>
+      <name>bin_1</name>                                       
+	<pose>-3.562247 0.089099 0.000002 -0.000051 0.000031 0.036442</pose>
+    </include>
+
+    <include>
+      <uri>model://human_bin</uri>
+      <name>bin_2</name>                                       
+	<pose>-1.322149 -0.566017 0 0 -0.000004 -0.022300</pose>
+    </include>
+                
+
+    <include>
+      <uri>model://soap_dispenser</uri>
+      <name>soap_1</name>                                       
+	  <pose>-2.254753 -2.699281 1.007372 0.000 -0.004538 0</pose>
+    </include>
+                
+<!-- marker -->
+
+    <include>
+      <uri>model://marking</uri>
+      <name>marker_1</name>                                       
+	  <pose>-2.83099 -0.379102 0 0 -0 0</pose>
+    </include>
+
+ 
+    <include>
+      <uri>model://marking</uri>
+      <name>marker_2</name>                                       
+	  <pose>-1.35473 -2.30194 0 0 -0 0</pose>
+    </include>
+
+
+    <include>
+      <uri>model://marking</uri>
+      <name>marker_3</name>                                       
+	  <pose>-3.58165 -1.06118 0 0 -0 0</pose>
+    </include>
+
+
+    <include>
+      <uri>model://marking</uri>
+      <name>marker_4</name>                                       
+	  <pose>-2.55525 0.188426 0 0 -0 0</pose>
+    </include>
+    
+     
+    
+    
+    
   </world>
 </sdf>
