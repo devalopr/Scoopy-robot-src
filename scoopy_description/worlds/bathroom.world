@@ -815,15 +815,14 @@
     
     
     
-    
     <light type="directional" name="bathroom_light">
 
 
       <pose>-2.631701 -0.670522 2.511903 0 -0 0</pose>
-      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <diffuse>0.1 0.1 0.1 1</diffuse>
       <specular>0.2 0.2 0.2 1</specular>
       <attenuation>
-        <range>800</range>
+        <range>50</range>
         <constant>0.9</constant>
         <linear>0.01</linear>
         <quadratic>0.001</quadratic>
@@ -874,6 +873,7 @@
                 
 
     <include>
+      <static>1</static>
       <uri>model://soap_dispenser</uri>
       <name>soap_1</name>                                       
 	  <pose>-2.254753 -2.699281 1.007372 0.000 -0.004538 0</pose>

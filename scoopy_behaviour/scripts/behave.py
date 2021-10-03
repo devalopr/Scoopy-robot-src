@@ -36,9 +36,22 @@ class Behaviour:
 
         self.bridge = CvBridge()
 
+        #RED color thresholding
+        self.red_lowerBound=np.array([149,199,69])
+        self.red_upperBound=np.array([179,255,255])
 
-        self.lowerBound=np.array([149,199,69])
-        self.upperBound=np.array([179,255,255])
+        #Dust bin blue color
+        self.blue_lowerBound=np.array([11,150,45])
+        self.blue_upperBound=np.array([158,220,255])
+
+        #Yellow threshold
+        self.yellow_lowerBound=np.array([13,68,195])
+        self.yellow_upperBound=np.array([164,126,255])
+
+        #Orange threshold
+        self.orange_lowerBound=np.array([0,219,0])
+        self.orange_upperBound=np.array([179,255,255])
+
 
         self.kernelOpen=np.ones((5,5))
         self.kernelClose=np.ones((20,20))
@@ -48,7 +61,7 @@ class Behaviour:
 
         self.scan = []
 
-        self.way_points["entry_pose"] = [-1.5,0,-1.7]
+        self.way_points["entry_pose"] = [-2.23,-0.048,3.14]
         self.way_points["counter_pose"] = [-1.5,-1.5,-1.7]
         self.way_points["sink_pose_right"] = [-2.9,-1.3,-3.14]
 
@@ -69,11 +82,11 @@ class Behaviour:
 
         #Defining publishers
         self.topic_name = {}
-        self.topic_name["camera"] = "/scooopy/camera1/image_raw"
+        self.topic_name["camera"] = "/real_sense/color/image_raw"
         self.topic_name["blw"] = "/scoopy/blw_revolute_position_controller/command"
         self.topic_name["brw"] = "/scoopy/brw_revolute_position_controller/command"
         #self.topic_name["camera_pan"] = "/scooopy/camera1/image_raw"
-        #self.topic_name["camera_tilt"] = "/scooopy/camera1/image_raw"
+        self.topic_name["camera_tilt"] = "/scoopy/camera_tilt_position_controller/command"
         self.topic_name["lid"] = "/scoopy/lid_revolute_position_controller/command"
         self.topic_name["mid_arm"] = "/scoopy/mid_inner_slider_position_controller/command"
         self.topic_name["outer_arm"] = "/scoopy/outer_mid_slider_position_controller/command"
@@ -89,12 +102,15 @@ class Behaviour:
         self.mid_joint = rospy.Publisher(self.topic_name["mid_arm"],Float64,queue_size=10)
         self.lid_joint = rospy.Publisher(self.topic_name["lid"],Float64,queue_size=10)
         self.tool_head_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
+        self.camera_tilt_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
+
         self.cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size = 10)
         self.scan = rospy.Subscriber('/scan', LaserScan, self.scan_callback)
+
         
         #Image processing
         self.processed_pub = rospy.Publisher("detected_img",Image,queue_size=10)
-        self.image_sub = rospy.Subscriber("/real_sense/color/image_raw",Image,self.callback)
+        self.image_sub = rospy.Subscriber(self.topic_name["camera"],Image,self.callback)
 
         
         #self.post_joint = rospy.Publisher(self.topic_name["post_slider"],Float64,queue_size=10)
@@ -107,6 +123,7 @@ class Behaviour:
 
 
     def behave(self):                              #main function
+        self.move_joint("camera_tilt",-1)
         rospy.sleep(2)
         self.move_joint("tool_head", -1.57)
         rospy.sleep(2)
@@ -121,22 +138,24 @@ class Behaviour:
         rospy.sleep(1)
         self.clean_counter()
         self.clean_sink()
-        rospy.sleep(1)
+        rospy.sleep(4)
+
+        #Move to center
+        self.move_location("center_pose")
+        #Scanning object around the robot      
+        self.scan_objects()
+        rospy.sleep(4)
+
         self.move_location("exit_pose_prev")
         self.move_location("exit_pose")
 
-    #Image callback
-    def callback(self,data):
 
-        #rospy.loginfo("Recieving images")
-        try:
-            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
-        except CvBridgeError as e:
-            print(e)
-            pass
+    #Image thresholding for different color
+    def color_threshold(self,cv_image,upper,lower):
+
 
         imgHSV= cv2.cvtColor(cv_image,cv2.COLOR_BGR2HSV)
-        mask=cv2.inRange(imgHSV,self.lowerBound,self.upperBound)
+        mask=cv2.inRange(imgHSV,upper,lower)
         maskOpen=cv2.morphologyEx(mask,cv2.MORPH_OPEN,self.kernelOpen)
         maskClose=cv2.morphologyEx(maskOpen,cv2.MORPH_CLOSE,self.kernelClose)
         maskFinal=maskClose
@@ -156,7 +175,25 @@ class Behaviour:
             self.processed_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
         except CvBridgeError as e:
             print(e)
+
+
+
+    #Image callback
+    def callback(self,data):
+
+        #rospy.loginfo("Recieving images")
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+
+            self.color_threshold(cv_image,self.red_lowerBound,self.red_upperBound)
+            self.color_threshold(cv_image,self.blue_lowerBound,self.blue_upperBound)
+            self.color_threshold(cv_image,self.yellow_lowerBound,self.yellow_upperBound)
+            self.color_threshold(cv_image,self.orange_lowerBound,self.orange_upperBound)
+
+        except CvBridgeError as e:
+            print(e)
             pass
+
 
     def scan_callback(self, msg):
         self.scan = msg
@@ -409,6 +446,8 @@ class Behaviour:
 
         elif(name == "tool_head"):
             self.tool_head_joint.publish(joint_val)
+        elif(name == "camera_tilt"):
+            self.camera_tilt_joint.publish(joint_val)    
 
     #Return centroid of the detected color
     def detect_object(self,color):
