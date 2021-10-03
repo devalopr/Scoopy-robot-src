@@ -6,8 +6,11 @@
 
 
   <!-- Adding simulation -->
+  
+  <!--
   <include file="$(find scoopy_description)/launch/bathroom.launch"/>
-
+  -->
+  
   <!-- Really Usefull Robot -->
 
   <!-- Map server -->

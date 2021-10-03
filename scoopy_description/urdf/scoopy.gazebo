@@ -6,7 +6,7 @@
 <xacro:property name="black_color" value="Gazebo/Black" />
 
 <xacro:property name="general_friction" value="0.1" />
-<xacro:property name="wheel_friction" value="1" />
+<xacro:property name="wheel_friction" value="0.2" />
 
 <xacro:property name="camera_link_name" value="realsense_1" />
 <xacro:property name="camera_name" value="real_sense" />

@@ -9,9 +9,11 @@ import sys
 
 from std_msgs.msg import String
 from std_msgs.msg import Float64
+from geometry_msgs.msg import Point, Twist
+from nav_msgs.msg import Odometry
 
 import cv2
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import Image, LaserScan
 from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
 
@@ -21,6 +23,7 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
+
 
 
 class Behaviour:
@@ -43,15 +46,15 @@ class Behaviour:
         self.trash_pose_x = 0
         self.trash_pose_y = 0
 
+        self.scan = []
 
-
-        self.way_points["sink_pose"] = [-2.9,-1.9,-3.14]
-        self.way_points["sink_pose_mid"] = [-2.9,-1.65,-3.14]
+        self.way_points["entry_pose"] = [-1.5,0,-1.7]
+        self.way_points["counter_pose"] = [-1.5,-1.5,-1.7]
         self.way_points["sink_pose_right"] = [-2.9,-1.3,-3.14]
 
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
-        self.way_points["exit_pose"] = [-0.008, -1.,3.14]
-        self.way_points["exit_pose_prev"] = [-2.355, -0.048,0.042]
+        self.way_points["exit_pose"] = [0,0,0]
+        self.way_points["exit_pose_prev"] = [-1.5,0,0]
 
 
         #Init movebase
@@ -79,15 +82,19 @@ class Behaviour:
 
 
 
+
+
         self.post_joint = rospy.Publisher(self.topic_name["post_slider"],Float64,queue_size=10)
         self.outer_joint = rospy.Publisher(self.topic_name["outer_arm"],Float64,queue_size=10)
         self.mid_joint = rospy.Publisher(self.topic_name["mid_arm"],Float64,queue_size=10)
         self.lid_joint = rospy.Publisher(self.topic_name["lid"],Float64,queue_size=10)
         self.tool_head_joint = rospy.Publisher(self.topic_name["tool_head"],Float64,queue_size=10)
-
+        self.cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size = 10)
+        self.scan = rospy.Subscriber('/scan', LaserScan, self.scan_callback)
+        
         #Image processing
         self.processed_pub = rospy.Publisher("detected_img",Image,queue_size=10)
-        self.image_sub = rospy.Subscriber("/scooopy/camera1/image_raw",Image,self.callback)
+        self.image_sub = rospy.Subscriber("/real_sense/color/image_raw",Image,self.callback)
 
         
         #self.post_joint = rospy.Publisher(self.topic_name["post_slider"],Float64,queue_size=10)
@@ -95,56 +102,28 @@ class Behaviour:
 
         #pub = rospy.Publisher('topic_name', std_msgs.msg.String, queue_size=10)
 
-        #pass
+        #pass 
         self.behave()
 
 
-    def behave(self):
-        #Init pose
-        rospy.loginfo("Setting the robot init pose")
-        #self.init_pose()
- 
-        #Moving to center
-        rospy.loginfo("Moving to center")
-        self.move_location("center_pose")
-        rospy.loginfo("Completed center pose movement")
-        rospy.sleep(4)
+    def behave(self):                              #main function
+        rospy.sleep(2)
+        self.move_joint("tool_head", -1.57)
+        rospy.sleep(2)
+        rospy.loginfo("Moving inside")
+        self.move_location("entry_pose")
 
-        #Moving to sink
-        rospy.loginfo("Moving to sink")
-        self.move_location("sink_pose")
-        rospy.loginfo("Completed sink pose movement")
-        rospy.sleep(4)
-
-
-        #Start cleaning counter
-        rospy.loginfo("Start cleaning counter")
-        self.start_cleaning_couter()
-
-        #Moving to the sink
-        rospy.loginfo("Moving right to sink")
-        self.move_location("sink_pose_mid")
-
-        self.clean_sink()
+        rospy.loginfo("Moving to counter-sink")
+        self.move_location("counter_pose")
         
-        #Goint to init pose
-        self.init_pose()
-
-        #Moving to the center of the bathroom
-        self.move_location("center_pose")
-
-        #Rotate tool head
-        self.move_joint("tool_head", 0)
-        rospy.sleep(4)
-
-        #Scanning for object
-        self.scan_objects()
-
-        #Exiting the room
+        rospy.sleep(1)
+        self.align_counter()
+        rospy.sleep(1)
+        self.clean_counter()
+        self.clean_sink()
+        rospy.sleep(1)
         self.move_location("exit_pose_prev")
-        rospy.sleep(4)
         self.move_location("exit_pose")
-
 
     #Image callback
     def callback(self,data):
@@ -179,6 +158,9 @@ class Behaviour:
             print(e)
             pass
 
+    def scan_callback(self, msg):
+        self.scan = msg
+
 
     #Marker function
     def publish_marker(self,x,y):
@@ -204,22 +186,47 @@ class Behaviour:
         self.marker_pub.publish(self.markerArray)
 
 
+    def clean_counter(self):
+        rospy.loginfo("Extending post slider")
+        self.move_joint("post_slider", 1.02)
+        rospy.sleep(18)
+        self.move_joint("arm", 0.6)
+        rospy.sleep(8)
+        self.move_joint("arm", 0.2)
+        rospy.sleep(5)
+        self.move_joint("tool_head", 1.57)
+        rospy.sleep(3)
+        self.move_joint("arm", 0.6)
+        rospy.sleep(5)
+        self.move_joint("arm", 0.2)
+        rospy.sleep(5)
+        self.move_joint("tool_head", -1.57)
+        rospy.sleep(3)
+        self.align_xy(0,0.65)
+        self.move_joint("arm", 0.6)
+        rospy.sleep(8)
+        self.move_joint("arm", 0.2)
+        rospy.sleep(6)
 
-
-    def init_pose(self):
-        rospy.loginfo("Moving to inital arm configuration")
-
-        self.move_joint("lid", 0)
-        rospy.sleep(4)
-        self.move_joint("tool_head", -1.6)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0)
-        rospy.sleep(4)
-        self.move_joint("outer_arm", 0)
-        rospy.sleep(4)
+    def clean_sink(self):
+        self.move_joint("post_slider", 1.06)
+        rospy.sleep(5)
+        self.align_xy(0,0.85)
+        self.move_joint("arm", 0.5)
+        rospy.sleep(8)
+        self.move_joint("arm", 0.2)
+        rospy.sleep(6)
+        self.align_xy(0,1.15)
+        self.move_joint("tool_head", 0)
+        self.move_joint("arm", 0.4)
+        rospy.sleep(8)
+        self.move_joint("arm", 0)
+        rospy.sleep(8)
+        self.move_joint("tool_head", -1.57)
+        rospy.sleep(3)
         self.move_joint("post_slider", 0)
-        rospy.sleep(14)
-        rospy.loginfo("Set Robot init pose")
+        rospy.sleep(18)
+
 
     def scan_arm(self):
         self.move_joint("outer_arm", 0.2)
@@ -301,31 +308,55 @@ class Behaviour:
 
         rospy.loginfo("Completed cleaning counter top")
 
-    def clean_sink(self):
+    def align_counter(self):                                              
+        vel = Twist()
+        while not rospy.is_shutdown():  
+            delta_scan = abs(self.scan.ranges[320] - self.scan.ranges[400])
+            print("delta_scan = ", delta_scan)
+            if delta_scan > 0.007:
+                vel.angular.z = 0.1
+                self.cmd_vel.publish(vel)  
+            else:
+                vel.angular.z = 0
+                self.cmd_vel.publish(vel)
+                break
+            rospy.sleep(0.1)
         
-        rospy.loginfo("Started cleaning sink")
+        self.align_xy(0.27,0)
+        rospy.sleep(0.5)
+        self.align_xy(0,0.35)
         
-        self.move_joint("mid_arm", 0.32)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.22)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.32)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.22)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0)
-        rospy.sleep(4)
-        self.move_location("sink_pose_right")
-        self.move_joint("mid_arm", 0.32)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.22)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.32)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0.22)
-        rospy.sleep(4)
-        self.move_joint("mid_arm", 0)
-        rospy.sleep(4)
+    def align_xy(self,x,y):
+        vel = Twist()
+        if x > 0:
+            while not rospy.is_shutdown():  
+                delta_scan = self.scan.ranges[360] - x 
+                if delta_scan > 0.01:
+                    vel.linear.x = 0.1
+                    self.cmd_vel.publish(vel)  
+                else:
+                    vel.linear.x = 0
+                    self.cmd_vel.publish(vel)
+                    break
+                rospy.sleep(0.1)
+        
+        if y > 0:
+            while not rospy.is_shutdown():  
+                delta_scan = self.scan.ranges[540] - y 
+                print("y = ", y, " delta_scan = ", delta_scan)
+                if delta_scan > 0.01:
+                    vel.linear.y = 0.1
+                    self.cmd_vel.publish(vel)  
+                elif delta_scan < -0.01:
+                    vel.linear.y = -0.1
+                    self.cmd_vel.publish(vel)  
+                else:
+                    vel.linear.y = 0
+                    self.cmd_vel.publish(vel)
+                    break
+                rospy.sleep(0.1)
+        
+
 
 
     def move_location(self,location_name):
@@ -369,11 +400,9 @@ class Behaviour:
         if(name == "post_slider"):
             self.post_joint.publish(joint_val)
 
-        elif(name == "outer_arm"):
-            self.outer_joint.publish(joint_val)
-
-        elif(name == "mid_arm"):
-            self.mid_joint.publish(joint_val)
+        elif(name == "arm"):
+            self.outer_joint.publish(joint_val/2)
+            self.mid_joint.publish(joint_val/2) 
 
         elif(name == "lid"):
             self.lid_joint.publish(joint_val)
