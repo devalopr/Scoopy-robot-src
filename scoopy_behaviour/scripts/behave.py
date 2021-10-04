@@ -61,7 +61,7 @@ class Behaviour:
 
         self.scan = []
 
-        self.way_points["entry_pose"] = [-2.23,-0.048,3.14]
+        self.way_points["entry_pose"] = [-1.5,0,-1.7]
         self.way_points["counter_pose"] = [-1.5,-1.5,-1.7]
         self.way_points["sink_pose_right"] = [-2.9,-1.3,-3.14]
 
@@ -207,18 +207,18 @@ class Behaviour:
         marker.header.frame_id = "map"
         marker.type = marker.CUBE
         marker.action = marker.ADD
-        marker.scale.x = 0.5                         # can keep this as gobal parameters
-        marker.scale.y = 0.5
+        marker.scale.x = x                        # can keep this as gobal parameters
+        marker.scale.y = y
         marker.scale.z = 0.01
         marker.color.a = 1.0
         marker.color.r = 0.0
         marker.color.g = 0.0
         marker.color.b = 1.0
 
-        marker.pose.position.x = x
-        marker.pose.position.y = y
+        marker.pose.position.x = -1.2 + (-x/2)
+        marker.pose.position.y = -2.5
 
-        marker.pose.orientation.w = 1.0
+        marker.pose.orientation.w = 1
 
         self.markerArray.markers.append(marker)
         self.marker_pub.publish(self.markerArray)
@@ -237,6 +237,7 @@ class Behaviour:
         self.move_joint("arm", 0.6)
         rospy.sleep(5)
         self.move_joint("arm", 0.2)
+        self.publish_marker(0.3, 0.6) 
         rospy.sleep(5)
         self.move_joint("tool_head", -1.57)
         rospy.sleep(3)
@@ -244,6 +245,7 @@ class Behaviour:
         self.move_joint("arm", 0.6)
         rospy.sleep(8)
         self.move_joint("arm", 0.2)
+        self.publish_marker(0.6, 0.6) 
         rospy.sleep(6)
 
     def clean_sink(self):
@@ -253,6 +255,7 @@ class Behaviour:
         self.move_joint("arm", 0.5)
         rospy.sleep(8)
         self.move_joint("arm", 0.2)
+        self.publish_marker(0.9, 0.6) 
         rospy.sleep(6)
         self.align_xy(0,1.15)
         self.move_joint("tool_head", 0)
@@ -263,7 +266,8 @@ class Behaviour:
         self.move_joint("tool_head", -1.57)
         rospy.sleep(3)
         self.move_joint("post_slider", 0)
-        rospy.sleep(18)
+        self.publish_marker(1.2, 0.6) 
+        rospy.sleep(17)
 
 
     def scan_arm(self):
