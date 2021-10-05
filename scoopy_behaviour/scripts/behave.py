@@ -58,6 +58,8 @@ class Behaviour:
 
         self.trash_pose_x = 0
         self.trash_pose_y = 0
+        self.start_x = 0
+        self.start_y = 0
 
         self.scan = []
 
@@ -68,6 +70,7 @@ class Behaviour:
         self.way_points["center_pose"] = [-2.405,-1.248,3.14]
         self.way_points["exit_pose"] = [0,0,0]
         self.way_points["exit_pose_prev"] = [-1.5,0,0]
+        self.way_points["start_point"] = [self.start_x,self.start_y,0]
 
 
         #Init movebase
@@ -105,6 +108,7 @@ class Behaviour:
 
         self.cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size = 10)
         self.scan = rospy.Subscriber('/scan', LaserScan, self.scan_callback)
+        self.start_point = rospy.Subscriber("/start_point", Point, self.start_point_callback)
 
         
         #Image processing
@@ -123,7 +127,8 @@ class Behaviour:
 
     def behave(self):                              #main function
         self.move_joint("camera_tilt",-1)
-        rospy.sleep(4)
+        rospy.sleep(2)
+        
         self.move_joint("tool_head", -1.57)
         rospy.sleep(2)
         rospy.loginfo("Moving inside")
@@ -147,8 +152,11 @@ class Behaviour:
         self.scan_objects()
         rospy.sleep(4)
 
+        self.move_joint("tool_head", -1.57)
         self.move_location("exit_pose_prev")
+     
         self.move_location("exit_pose")
+        self.send_movebase_pose(self.start_x,self.start_y,0)
 
 
     #Image thresholding for different color
@@ -198,6 +206,10 @@ class Behaviour:
 
     def scan_callback(self, msg):
         self.scan = msg
+
+    def start_point_callback(self, msg):
+        self.start_x = msg.x
+        self.start_y = msg.y
 
 
     #Marker function
@@ -353,7 +365,7 @@ class Behaviour:
         vel = Twist()
         while not rospy.is_shutdown():  
             delta_scan = abs(self.scan.ranges[320] - self.scan.ranges[400])
-            print("delta_scan = ", delta_scan)
+            #print("delta_scan = ", delta_scan)
             if delta_scan > 0.007:
                 vel.angular.z = 0.1
                 self.cmd_vel.publish(vel)  
@@ -384,7 +396,7 @@ class Behaviour:
         if y > 0:
             while not rospy.is_shutdown():  
                 delta_scan = self.scan.ranges[540] - y 
-                print("y = ", y, " delta_scan = ", delta_scan)
+                #print("y = ", y, " delta_scan = ", delta_scan)
                 if delta_scan > 0.01:
                     vel.linear.y = 0.1
                     self.cmd_vel.publish(vel)  

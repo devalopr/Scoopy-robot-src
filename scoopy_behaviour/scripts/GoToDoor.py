@@ -14,11 +14,14 @@ class Go:
         self.x = 0
         self.y = 0
         self.theta = 0
+        self.initial_x = 0
+        self.initial_y = 0
         self.initial_theta = 0
         self.front_scan = 200
         self.angle_scan = 0
         self.scan = []
         self.odom = rospy.Subscriber("/odom", Odometry, self.odom_callback)
+        self.start_point = rospy.Publisher("/start_point", Point)
         self.cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size = 10)        
         self.scan = rospy.Subscriber('/scan', LaserScan, self.scan_callback)
         self.tool_head_topic = "/scoopy/toolhead_revolute_position_controller/command"
@@ -39,10 +42,12 @@ class Go:
     def main(self):
         rospy.sleep(2)
         self.tool_head_joint.publish(-1.57)
-
+        
+        self.initial_x = self.x 
+        self.initial_y = self.y 
+        
         if(abs(self.x + self.y) > 1):
             self.go_to_door()
-
 
         #self.go_to_door()
         print("LAUNCHING NAVIGATION STACK...")
@@ -60,7 +65,7 @@ class Go:
         t0 = rospy.get_time()
         
         while not rospy.is_shutdown():                                  #Scanning to find the wall
-            print("Theta = ", self.theta, "scan = ", self.front_scan) 
+            #print("Theta = ", self.theta, "scan = ", self.front_scan) 
             t_now = rospy.get_time()
             delta_theta = abs(self.initial_theta - self.theta)
             delta_t = rospy.get_time() - t0
@@ -87,7 +92,7 @@ class Go:
         
         while not rospy.is_shutdown():                        #aligning the robot perpendicular to the wall
             delta_theta = abs(min_scan_angle - self.theta)
-            print("delta_theta =", delta_theta) 
+            #print("delta_theta =", delta_theta) 
             if delta_theta > 0.1:
                 vel.angular.z = 0.5
                 self.cmd_vel.publish(vel)
@@ -134,7 +139,7 @@ class Go:
             if self.front_scan < min_scan:
                 min_scan = self.front_scan
                 min_scan_angle = self.theta
-                print("new min, theta = ", self.theta, "front_scan = ", self.front_scan)
+                #print("new min, theta = ", self.theta, "front_scan = ", self.front_scan)
             
             rospy.sleep(0.1)
             self.cmd_vel.publish(vel)
@@ -166,7 +171,7 @@ class Go:
                     self.cmd_vel.publish(vel)  
 
                 rospy.sleep(0.1)
-                print("front_scan = ", self.front_scan, "theta = ", self.theta)
+                #print("front_scan = ", self.front_scan, "theta = ", self.theta)
 
             
             
@@ -180,7 +185,7 @@ class Go:
 
             while not rospy.is_shutdown():                        #turns perpendicular to the next wall
                 delta_theta = abs(min_scan_angle - self.theta)
-                print("delta_theta =", delta_theta) 
+                #print("delta_theta =", delta_theta) 
                 if delta_theta > 0.1:
                     vel.angular.z = 0.5
                     self.cmd_vel.publish(vel)
@@ -209,14 +214,24 @@ class Go:
 
         rot_q = msg.pose.pose.orientation
         (roll, pitch, self.theta) = euler_from_quaternion([rot_q.x, rot_q.y, rot_q.z, rot_q.w])
+        self.start_point_publisher()
+
+
+    def start_point_publisher(self):
+        location = Point () 
+        location.x = self.initial_x
+        location.y = self.initial_y
+        self.start_point.publish(location)
+
 
     def scan_callback(self, msg):
         self.front_scan = msg.ranges[360]
         self.angle_scan = msg.ranges[280]
         self.scan = msg
 
+
 if __name__ == '__main__':
     rospy.init_node('test', anonymous = True)
-    Go()
+    GTD_obj = Go()
     
    
